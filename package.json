@@ -1,5 +1,5 @@
 {
-  "name": "mf-store-nlr",
+  "name": "mf-core-nlr",
   "private": true,
   "type": "module",
   "scripts": {
