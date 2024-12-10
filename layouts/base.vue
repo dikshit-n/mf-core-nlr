@@ -14,14 +14,18 @@
       </ul>
     </div>
     <main><slot/></main>
+    <footer>Footer</footer>
   </div>
-  <footer>Footer</footer>
 </template>
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue';
   withDefaults(defineProps<{ routes: { name: string, to: string }[] }>(), {
-    routes: [] as any
+    routes: [
+      { name: 'Home', to: '/' },
+      { name: 'Remote 1', to: '/remote1' },
+      { name: 'Remote 2', to: '/remote2' },
+    ] as any
   })
 </script>
 
