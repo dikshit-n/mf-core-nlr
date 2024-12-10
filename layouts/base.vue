@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <div class="sidebar">
+    <div class="sidebar" style="background-color: lightgray; height: 100%; margin-top: 10px;">
       <h1>HealPros</h1>
       <ul>
         <li v-for="route in routes" :key="route.name">
@@ -36,8 +36,8 @@ import { withDefaults, defineProps } from 'vue';
   display: flex;
   flex-direction: row;
   flex: 200px auto;
-  gap: 10px;
-  background-color: lightgray;
+  gap: 20px;
+  height: 100vh;
 }
 .right {
   display: flex;
