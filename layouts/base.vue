@@ -36,6 +36,8 @@ import { withDefaults, defineProps } from 'vue';
   display: flex;
   flex-direction: row;
   flex: 200px auto;
+  gap: 10px;
+  background-color: lightgray;
 }
 .right {
   display: flex;
