@@ -22,3 +22,11 @@ import { withDefaults, defineProps } from 'vue';
     routes: [] as any
   })
 </script>
+
+<style scoped>
+.content {
+  display: flex;
+  flex-direction: row;
+  flex: 200px auto;
+}
+</style>
