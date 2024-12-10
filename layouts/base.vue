@@ -1,7 +1,4 @@
 <template>
-  <header style="width: 100%; border-bottom: 1px solid gray;">
-    <h1>Layout</h1>
-  </header>
   <div class="content">
     <div class="sidebar">
       <h1>HealPros</h1>
@@ -14,6 +11,9 @@
       </ul>
     </div>
     <div class="right">
+      <header style="width: 100%; border-bottom: 1px solid gray;">
+        <h1>Layout</h1>
+      </header>
       <main><slot/></main>
       <footer>Footer</footer>
     </div>
