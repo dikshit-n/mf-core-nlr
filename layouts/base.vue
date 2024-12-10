@@ -13,8 +13,10 @@
         </li>
       </ul>
     </div>
-    <main><slot/></main>
-    <footer>Footer</footer>
+    <div class="right">
+      <main><slot/></main>
+      <footer>Footer</footer>
+    </div>
   </div>
 </template>
 
@@ -34,5 +36,10 @@ import { withDefaults, defineProps } from 'vue';
   display: flex;
   flex-direction: row;
   flex: 200px auto;
+}
+.right {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 </style>
