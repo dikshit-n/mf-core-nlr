@@ -32,8 +32,8 @@
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue';
-import { v4 } from 'uuid';
-console.log(v4(), '----uuid form mf-core')
+// import { v4 } from 'uuid';
+// console.log(v4(), '----uuid form mf-core')
   withDefaults(defineProps<{ routes: { name: string, to: string }[] }>(), {
     routes: [
       { name: 'Home', to: '/' },
