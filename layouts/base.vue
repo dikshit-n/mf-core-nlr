@@ -19,13 +19,19 @@
         <footer>Footer</footer>
       </div>
     </div>
-    <BaseError />
+    <template #error="{ error }">
+      <div>
+        {{ error.statusCode }}
+      </div>
+      <div>
+        {{ error.message }}
+      </div>
+    </template>
   </NuxtErrorBoundary>
 </template>
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue';
-import BaseError from '~/components/BaseError.vue';
   withDefaults(defineProps<{ routes: { name: string, to: string }[] }>(), {
     routes: [
       { name: 'Home', to: '/' },
