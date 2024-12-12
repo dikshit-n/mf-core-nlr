@@ -1,27 +1,31 @@
 <template>
-  <div class="content">
-    <div class="sidebar" style="background-color: lightgray; height: 100%; margin-top: 10px;">
-      <h1>HealPros</h1>
-      <ul>
-        <li v-for="route in routes" :key="route.name">
-          <NuxtLink :to="route.to">
-            {{ route.name }}
-          </NuxtLink>
-        </li>
-      </ul>
+  <NuxtErrorBoundary>
+    <div class="content">
+      <div class="sidebar" style="background-color: lightgray; height: 100%; margin-top: 10px;">
+        <h1>HealPros</h1>
+        <ul>
+          <li v-for="route in routes" :key="route.name">
+            <NuxtLink :to="route.to">
+              {{ route.name }}
+            </NuxtLink>
+          </li>
+        </ul>
+      </div>
+      <div class="right">
+        <header style="width: 100%; border-bottom: 1px solid gray;">
+          <h1>Layout</h1>
+        </header>
+        <main><slot/></main>
+        <footer>Footer</footer>
+      </div>
     </div>
-    <div class="right">
-      <header style="width: 100%; border-bottom: 1px solid gray;">
-        <h1>Layout</h1>
-      </header>
-      <main><slot/></main>
-      <footer>Footer</footer>
-    </div>
-  </div>
+    <BaseError />
+  </NuxtErrorBoundary>
 </template>
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue';
+import BaseError from '~/components/BaseError.vue';
   withDefaults(defineProps<{ routes: { name: string, to: string }[] }>(), {
     routes: [
       { name: 'Home', to: '/' },
