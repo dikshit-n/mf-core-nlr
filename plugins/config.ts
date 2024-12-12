@@ -1,7 +1,7 @@
 export default defineNuxtPlugin(() => {
   return {
     provide: {
-      config: {
+      moduleConfig: {
         name: 'Dashboard'
       }
     }
