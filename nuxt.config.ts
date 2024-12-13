@@ -10,7 +10,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [
     // https://nuxt.com/docs/guide/going-further/layers#relative-paths-and-aliases
-    join(currentDir, './assets/main.css')
+    join(currentDir, './assets/base.css')
   ],
   modules: ['@nuxt/image']
 });
