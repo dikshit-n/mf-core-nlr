@@ -1,57 +1,84 @@
 <template>
-  <NuxtErrorBoundary>
-    <div class="content">
-      <div class="sidebar" style="background-color: lightgray; height: 100%; margin-top: 10px;">
-        <h1>HealPros</h1>
-        <ul>
-          <li v-for="route in routes" :key="route.name">
-            <NuxtLink :to="route.to">
-              {{ route.name }}
-            </NuxtLink>
-          </li>
-        </ul>
-      </div>
-      <div class="right">
-        <header style="width: 100%; border-bottom: 1px solid gray;">
-          <h1>Layout</h1>
-        </header>
-        <main><slot/></main>
-        <footer>Footer</footer>
-      </div>
+  <div class="container">
+    <div class="sidebar">
+      <NuxtImg src="/app-logo.png" class="app-logo" />
+      <nav class="route-list">
+        <NuxtLink :to="route.to" v-for="route in routes" :key="route.name">
+          <p>{{ route.name }}</p>
+          <i class="pi pi-angle-right"></i>
+        </NuxtLink>
+      </nav>
     </div>
-    <template #error="{ error }">
-      <div>
-        {{ error.statusCode }}
-      </div>
-      <div>
-        {{ error.message }}
-      </div>
-    </template>
-  </NuxtErrorBoundary>
+    <div class="right">
+      <header>
+        <h3>
+          <slot name="header"></slot>
+        </h3>
+      </header>
+      <main><slot/></main>
+      <footer>
+        <slot name="footer"></slot>
+      </footer>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 import { withDefaults, defineProps } from 'vue';
-  withDefaults(defineProps<{ routes: { name: string, to: string }[] }>(), {
-    routes: [
-      { name: 'Home', to: '/' },
-      { name: 'Remote 1', to: '/remote1' },
-      { name: 'Remote 2', to: '/remote2' },
-    ] as any
+  withDefaults(defineProps<{ routes?: { name: string, to: string }[] }>(), {
+    routes: [] as any
   })
 </script>
 
-<style scoped>
-.content {
+<style lang="scss" scoped>
+.container {
   display: flex;
   flex-direction: row;
   flex: 200px auto;
-  gap: 20px;
   height: 100vh;
-}
-.right {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  max-height: 100vh;
+  overflow: auto;
+  .sidebar {
+    padding: 5px;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .app-logo {
+      height: 35px;
+      background-color: lightgray;
+    }
+    .route-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 100%;
+      a {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        list-style: none;
+        text-decoration: none;
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+  .right {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    header {
+      background-color: lightgray;
+      padding: 0 10px;
+      border: 2px solid black;
+    }
+    main {
+      padding: 10px;
+    }
+  }
 }
 </style>
