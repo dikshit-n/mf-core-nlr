@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="sidebar">
-      <NuxtImg src="/app-logo.png" class="app-logo" />
+      <NuxtImg src="/img/app-logo.png" class="app-logo" />
       <nav class="route-list">
         <NuxtLink :to="route.to" v-for="route in routes" :key="route.name">
           <p>{{ route.name }}</p>
