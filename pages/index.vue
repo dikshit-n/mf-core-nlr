@@ -1,6 +1,6 @@
 <template>
     <h1>MF-core</h1>
-    <BaseButton>Test</BaseButton>
+    <Button label="Test"></Button>
 </template>
 
 <script lang="ts">
