@@ -24,6 +24,8 @@
 </template>
 
 <script setup lang="ts">
+// import all the css related to the layout here
+// this will be extended to extending layers
 import '@/assets/css/base.css'
 import { withDefaults, defineProps } from 'vue';
   withDefaults(defineProps<{ routes?: { name: string, to: string }[] }>(), {
