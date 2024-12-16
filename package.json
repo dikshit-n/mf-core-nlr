@@ -15,7 +15,9 @@
     "primeicons": "^7.0.0",
     "uuid": "^11.0.3",
     "vue": "latest",
-    "vue-router": "latest",
+    "vue-router": "latest"
+  },
+  "devDependencies": {
     "sass-embedded": "^1.83.0"
   }
 }
