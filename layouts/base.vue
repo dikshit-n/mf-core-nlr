@@ -24,6 +24,7 @@
 </template>
 
 <script setup lang="ts">
+import '@/assets/css/base.css'
 import { withDefaults, defineProps } from 'vue';
   withDefaults(defineProps<{ routes?: { name: string, to: string }[] }>(), {
     routes: [] as any

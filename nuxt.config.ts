@@ -3,8 +3,5 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-11-01',
   devtools: { enabled: true },
-  css: [
-    '/css/base.css'
-  ],
   modules: ['@nuxt/image']
 });
