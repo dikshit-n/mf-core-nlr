@@ -1,9 +1,9 @@
 <template>
-  <button class="btn">
-    <slot/>
-  </button>
+  <Button v-bind="props" />
 </template>
-
+<script setup>
+import Button from 'primevue/button';
+</script>
 <style scoped>
   .btn {
     padding: 10px 20px;
