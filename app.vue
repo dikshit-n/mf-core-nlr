@@ -1,6 +1,6 @@
 <template>
   <NuxtLayout :routes="routes">
-    <template #header>
+    <template #headerActions>
       Core App
     </template>
     <NuxtPage />

@@ -11,9 +11,8 @@
     </div>
     <div class="right">
       <header>
-        <h3>
-          <slot name="header"></slot>
-        </h3>
+        <h1><slot name="title" /></h1>
+        <slot name="headerActions"></slot>
       </header>
       <main><slot/></main>
       <footer>
@@ -30,7 +29,7 @@ import '@/assets/css/base.css'
 import { withDefaults, defineProps } from 'vue';
   withDefaults(defineProps<{ routes?: { name: string, to: string }[] }>(), {
     routes: [] as any
-  })
+  });
 </script>
 
 <style lang="scss" scoped>
@@ -75,9 +74,16 @@ import { withDefaults, defineProps } from 'vue';
     flex-direction: column;
     width: 100%;
     header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 10px;
       background-color: lightgray;
-      padding: 0 10px;
       border: 2px solid black;
+      h1 {
+        margin: 0;
+        font-weight: 400;
+      }
     }
     main {
       padding: 10px;
