@@ -73,6 +73,7 @@ import { withDefaults, defineProps } from 'vue';
     display: flex;
     flex-direction: column;
     width: 100%;
+    flex: 1;
     header {
       display: flex;
       justify-content: space-between;
@@ -87,6 +88,8 @@ import { withDefaults, defineProps } from 'vue';
     }
     main {
       padding: 10px;
+      flex: auto;
+      overflow: auto;
     }
   }
 }

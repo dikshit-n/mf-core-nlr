@@ -4,6 +4,7 @@
 </template>
 
 <script lang="ts">
+import Button from 'primevue/button'
     definePageMeta({
         layout: 'base',
     });
