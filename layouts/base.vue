@@ -53,6 +53,8 @@ import '@/assets/css/base.css'
 
 import { defineProps } from 'vue';
 import type { Route } from '~/types/route';
+import PanelMenu from 'primevue/panelmenu';
+import Button from 'primevue/button';
 const router = useRouter();
 const props = defineProps<{ routes?: Route[] }>()
 const menuItems = props.routes?.map(route => ({
