@@ -12,11 +12,12 @@
   "dependencies": {
     "@nuxt/content": "2.13.4",
     "@nuxt/image": "1.8.1",
-    "@primevue/themes": "^4.2.5",
     "@primevue/nuxt-module": "^4.2.5",
+    "@primevue/themes": "^4.2.5",
     "nuxt": "^3.14.1592",
     "primeicons": "^7.0.0",
     "primevue": "^4.2.5",
+    "rxjs": "^7.8.1",
     "uuid": "^11.0.3",
     "vue": "latest",
     "vue-router": "latest"
