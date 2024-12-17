@@ -7,9 +7,33 @@
   </NuxtLayout>
 </template>
 <script setup lang="ts">
-  const routes = [
-    { name: 'Home', to: '/' },
-    { name: 'Remote 1', to: '/remote1' },
-    { name: 'Remote 2', to: '/remote2' }
-  ]
+const routes = [
+  {
+    "label": "Dashboard",
+    "path": "/dashboard",
+    "icon": "dashboard-icon",
+    "roles": ["admin", "user"],
+    "submenus": []
+  },
+  {
+    "label": "Orders",
+    "path": "/orders",
+    "icon": "orders-icon",
+    "roles": ["admin"],
+    "submenus": []
+  },
+  {
+    "label": "Administration",
+    "path": "/admin",
+    "icon": "admin-icon",
+    "roles": ["admin"],
+    "submenus": [
+      {
+        "label": "Accounts",
+        "path": "/admin/accounts",
+        "roles": ["admin"]
+      }
+    ]
+  }
+]
 </script>
