@@ -1,30 +1,36 @@
-import { BehaviorSubject, filter } from "rxjs";
+// utils/event-bus.ts
+import { Subject } from "rxjs";
 
-const broadcastChannel = new BroadcastChannel("microfrontend-events");
+// Create a Subject for intra-tab communication
+const subject = new Subject<any>();
+
+// BroadcastChannel for inter-tab communication
+const broadcastChannel = new BroadcastChannel("global-events");
 
 class EventBus {
-  private event$ = new BehaviorSubject<any>(null);
-
+  // Emit events both within the tab and across tabs
   emit(event: string, payload: any) {
-    const data = { event, payload };
-    this.event$.next(data);
-    broadcastChannel.postMessage(data);
+    subject.next({ event, payload });
+    broadcastChannel.postMessage({ event, payload }); // Send to other tabs
   }
 
+  // Subscribe to events
   on(event: string, callback: (payload: any) => void) {
-    // Filter out null emissions and match event names
-    this.event$
-      .pipe(filter((data) => data && data.event === event))
-      .subscribe((data) => callback(data.payload));
-
-    // Handle BroadcastChannel messages without overwriting existing handlers
-    broadcastChannel.addEventListener("message", (message) => {
-      if (message.data && message.data.event === event) {
-        callback(message.data.payload);
+    const subscription = subject.subscribe((data) => {
+      if (data.event === event) {
+        callback(data.payload);
       }
     });
+
+    // Listen to BroadcastChannel for inter-tab events
+    broadcastChannel.onmessage = (message) => {
+      if (message.data.event === event) {
+        callback(message.data.payload);
+      }
+    };
+
+    return subscription; // Return subscription to allow cleanup
   }
 }
-
 const eventBus = new EventBus();
 export default eventBus;
