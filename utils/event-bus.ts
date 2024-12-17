@@ -11,7 +11,7 @@ class EventBus {
   // Emit events both within the tab and across tabs
   emit(event: string, payload: any) {
     subject.next({ event, payload });
-    //broadcastChannel.postMessage({ event, payload }); // Send to other tabs
+    broadcastChannel.postMessage({ event, payload }); // Send to other tabs
   }
 
   // Subscribe to events
