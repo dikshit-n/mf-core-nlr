@@ -16,8 +16,9 @@ export default defineNuxtConfig({
           prefix: 'p',
           darkModeSelector: '.p-dark',
           cssLayer: false
-        }
+        },
+        toast: true
       }
-    }
+    },
   }
 });
