@@ -9,29 +9,33 @@
 <script setup lang="ts">
 const routes = [
   {
-    "label": "Dashboard",
-    "path": "/dashboard",
-    "icon": "dashboard-icon",
-    "roles": ["admin", "user"],
-    "submenus": []
+    label: "Dashboard",
+    path: "/dashboard",
+    icon: "pi pi-palette",
+    roles: ["admin", "user"]
   },
   {
-    "label": "Orders",
-    "path": "/orders",
-    "icon": "orders-icon",
-    "roles": ["admin"],
-    "submenus": []
+    label: "Orders",
+    path: "/orders",
+    icon: "pi pi-home",
+    roles: ["admin"]
   },
   {
-    "label": "Administration",
-    "path": "/admin",
-    "icon": "admin-icon",
-    "roles": ["admin"],
-    "submenus": [
+    label: "Administration",
+    icon: "admin-icon",
+    roles: ["admin"],
+    submenus: [
       {
-        "label": "Accounts",
-        "path": "/admin/accounts",
-        "roles": ["admin"]
+        label: "Accounts",
+        path: "/admin/accounts",
+        roles: ["admin"],
+        icon: 'pi pi-bookmark'
+      },
+      {
+        label: "Services",
+        path: "/admin/services",
+        roles: ["admin"],
+        icon: 'pi pi-bookmark'
       }
     ]
   }
