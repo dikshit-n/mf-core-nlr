@@ -3,16 +3,30 @@
     <div class="sidebar">
       <NuxtImg src="/img/app-logo.png" class="app-logo" />
       <nav class="route-list">
-        <template v-for="route in routes" :key="route.path">
-          <Button v-if="!route.submenus?.length" as="router-link" severity="secondary" variant="text"
-            :label="route.label" :to="route.path" />
-          <div v-else>
-            <Button severity="secondary" variant="text" :label="route.label" />
-            <template v-for="submenu in route.submenus" :key="submenu.path">
-              <Button as="router-link" severity="secondary" variant="text" :label="submenu.label" :to="submenu.path" />
+        <nav hidden>
+          <ul class="layout-menu">
+            <template v-for="route in routes" :key="route.path">
+              <li>
+                <Button v-if="!route.submenus?.length" as="router-link" severity="secondary" variant="text"
+                  :label="route.label" :to="route.path" />
+                <template v-else>
+                  <Button severity="secondary" variant="text" :label="route.label" />
+                  <nav>
+                    <ul>
+                      <template v-for="submenu in route.submenus" :key="submenu.path">
+                        <li>
+                          <Button as="router-link" severity="secondary" variant="text" :label="submenu.label"
+                            :to="submenu.path" />
+                        </li>
+                      </template>
+                    </ul>
+                  </nav>
+                </template>
+              </li>
             </template>
-          </div>
-        </template>
+          </ul>
+        </nav>
+        <PanelMenu :model="menuItems" />
       </nav>
     </div>
     <div class="right">
@@ -39,7 +53,18 @@ import '@/assets/css/base.css'
 
 import { defineProps } from 'vue';
 import type { Route } from '~/types/route';
-defineProps<{ routes?: Route[] }>()
+const router = useRouter();
+const props = defineProps<{ routes?: Route[] }>()
+const menuItems = props.routes?.map(route => ({
+  label: route.label,
+  icon: route.icon,
+  command: () => route.path && router.push(route.path),
+  items: route.submenus?.map(menu => ({
+    label: menu.label,
+    icon: menu.icon,
+    command: () => menu.path && router.push(menu.path)
+  }))
+}));
 </script>
 
 <style lang="scss" scoped>
@@ -110,6 +135,19 @@ defineProps<{ routes?: Route[] }>()
       flex: auto;
       overflow: auto;
     }
+  }
+
+  .layout-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .layout-menu>li>nav ul {
+    list-style: none;
+    margin-block: 0;
+    margin-inline: 1rem 0;
+    padding: .25rem 0;
   }
 }
 </style>

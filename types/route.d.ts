@@ -1,7 +1,7 @@
 export interface Route {
   label: string
   path?: string
-  icon: string
+  icon?: string
   roles: string[]
   submenus?: ChildRoute[]
 }
