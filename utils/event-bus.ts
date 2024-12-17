@@ -1,36 +1,33 @@
-// utils/event-bus.ts
-import { Subject } from "rxjs";
+import { Subject } from 'rxjs';
 
-// Create a Subject for intra-tab communication
-const subject = new Subject<any>();
+export class EventBus {
+  private events = new Map<string, Subject<any>>();
 
-// BroadcastChannel for inter-tab communication
-const broadcastChannel = new BroadcastChannel("global-events");
-
-class EventBus {
-  // Emit events both within the tab and across tabs
-  emit(event: string, payload: any) {
-    subject.next({ event, payload });
-    broadcastChannel.postMessage({ event, payload }); // Send to other tabs
+  // Emit an event with a specific key
+  emit(eventKey: string, payload: any): void {
+    if (!this.events.has(eventKey)) {
+      this.events.set(eventKey, new Subject<any>());
+    }
+    this.events.get(eventKey)!.next(payload);
   }
 
-  // Subscribe to events
-  on(event: string, callback: (payload: any) => void) {
-    const subscription = subject.subscribe((data) => {
-      if (data.event === event) {
-        callback(data.payload);
-      }
-    });
+  // Listen to an event with a specific key
+  on(eventKey: string, callback: (data: any) => void): void {
+    if (!this.events.has(eventKey)) {
+      this.events.set(eventKey, new Subject<any>());
+    }
+    this.events.get(eventKey)!.subscribe(callback);
+  }
 
-    // Listen to BroadcastChannel for inter-tab events
-    broadcastChannel.onmessage = (message) => {
-      if (message.data.event === event) {
-        callback(message.data.payload);
-      }
-    };
-
-    return subscription; // Return subscription to allow cleanup
+  // Optional: clear all listeners for an event
+  clear(eventKey: string): void {
+    if (this.events.has(eventKey)) {
+      this.events.get(eventKey)!.complete();
+      this.events.delete(eventKey);
+    }
   }
 }
+
+// Export a singleton instance of EventBus
 const eventBus = new EventBus();
 export default eventBus;
