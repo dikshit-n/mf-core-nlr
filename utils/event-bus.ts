@@ -1,34 +1,32 @@
-// // // core/utils/eventbus.ts
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from "rxjs";
 
-export class EventBus {
-  private events = new Map<string, Subject<any>>();
+const broadcastChannel = new BroadcastChannel("microfrontend-events");
 
-  // Emit an event with a specific key
-  emit(eventKey: string, payload: any): void {
-    if (!this.events.has(eventKey)) {
-      this.events.set(eventKey, new Subject<any>());
-    }
-    this.events.get(eventKey)!.next(payload);
+// RxJS Event Bus
+class EventBus {
+  private event$ = new BehaviorSubject<any>(null);
+
+  emit(event: string, payload: any) {
+    const data = { event, payload };
+    this.event$.next(data);
+    // Send event via BroadcastChannel for cross-tab communication
+    broadcastChannel.postMessage(data);
   }
 
-  // Listen to an event with a specific key
-  on(eventKey: string, callback: (data: any) => void): void {
-    if (!this.events.has(eventKey)) {
-      this.events.set(eventKey, new Subject<any>());
-    }
-    this.events.get(eventKey)!.subscribe(callback);
-  }
-
-  // Optional: clear all listeners for an event
-  clear(eventKey: string): void {
-    if (this.events.has(eventKey)) {
-      this.events.get(eventKey)!.complete();
-      this.events.delete(eventKey);
-    }
+  on(event: string, callback: (payload: any) => void) {
+    // Listen to events internally via RxJS
+    this.event$.subscribe((data) => {
+      if (data && data.event === event) {
+        callback(data.payload);
+      }
+    });
+    // Listen to events via BroadcastChannel
+    broadcastChannel.onmessage = (message) => {
+      if (message.data.event === event) {
+        callback(message.data.payload);
+      }
+    };
   }
 }
 
-// Export a singleton instance of EventBus
-const eventBus = new EventBus();
-export default eventBus;
+export const eventBus = new EventBus();
